@@ -31,7 +31,7 @@ def ask_openai(prompt: str) -> str:
             {"role": "user", "content": prompt},
         ],
        tools=[
-            { type: "web_search" },
+            { "type": "web_search" },
         ]
     )
     return resp.choices[0].message.content.strip()
