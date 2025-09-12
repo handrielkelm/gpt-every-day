@@ -30,7 +30,7 @@ def ask_openai(prompt: str) -> str:
             {"role": "system", "content": "Responda em português de forma concisa."},
             {"role": "user", "content": prompt},
         ],
-       tools: [
+       tools=[
             { type: "web_search" },
         ]
     )
