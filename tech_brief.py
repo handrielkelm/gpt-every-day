@@ -24,16 +24,12 @@ if not MESSAGE:
 
 def ask_openai(prompt: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)
-    resp = client.chat.completions.create(
-        model="gpt-5", 
-        messages=[
-            {"role": "system", "content": "Responda em português de forma concisa."},
-            {"role": "user", "content": prompt},
-        ],
+    resp = client.responses.create(
+        model="gpt-5",
         tools=[{"type": "web_search"}],
-
+        input=prompt
     )
-    return resp.choices[0].message.content.strip()
+    return resp.output_text.strip()
 
 def send_telegram(text: str):
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"
