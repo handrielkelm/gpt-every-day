@@ -25,7 +25,7 @@ if not MESSAGE:
 def ask_openai(prompt: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)
     resp = client.chat.completions.create(
-        model="gpt-4o", 
+        model="gpt-5", 
         messages=[
             {"role": "system", "content": "Responda em português de forma concisa."},
             {"role": "user", "content": prompt},
