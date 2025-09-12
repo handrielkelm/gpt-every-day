@@ -29,8 +29,7 @@ def ask_openai(prompt: str) -> str:
         messages=[
             {"role": "system", "content": "Responda em português de forma concisa."},
             {"role": "user", "content": prompt},
-        ],
-        temperature=0.3,
+        ]
     )
     return resp.choices[0].message.content.strip()
 
