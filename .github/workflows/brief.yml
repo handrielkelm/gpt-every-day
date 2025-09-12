@@ -1,0 +1,22 @@
+name: Tech Brief to Telegram
+
+on:
+  schedule:
+    - cron: "45 1 * * *"   # 08:00 BRT = 11:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install openai requests
+      - run: python tech_brief.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          MESSAGE: ${{ secrets.MESSAGE }}
