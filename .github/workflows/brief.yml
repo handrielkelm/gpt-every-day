@@ -2,7 +2,7 @@ name: Tech Brief to Telegram
 
 on:
   schedule:
-    - cron: "45 1 * * *"   # 08:00 BRT = 11:00 UTC
+    - cron: "0 22 * * 0"
   workflow_dispatch: {}
 
 jobs:
