@@ -3,12 +3,11 @@ import sys
 import requests
 from openai import OpenAI
 
-# variáveis obrigatórias
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TG_BOT_TOKEN   = os.getenv("TG_BOT_TOKEN")
 TG_CHAT_ID     = os.getenv("TG_CHAT_ID")
 
-# mensagem pode vir por env ou argumento
 MESSAGE = os.getenv("MESSAGE")
 if not MESSAGE and len(sys.argv) > 1:
     MESSAGE = " ".join(sys.argv[1:])
@@ -38,14 +37,13 @@ def send_telegram(text: str):
         json={"chat_id": TG_CHAT_ID, "text": text, "parse_mode": "Markdown", "disable_web_page_preview": True},
         timeout=30,
     )
-    r.raise_for_status()
-    r = requests.post(url, json=payload, timeout=20)
     if r.status_code != 200:
-        print("Telegram error:", r.status_code, r.text)  # mostra o motivo
+        print("Telegram error:", r.status_code, r.text)  
         r.raise_for_status()
+    r.raise_for_status()
 
 def main():
-    print(f"▶️ Prompt: {MESSAGE[:80]}...")  # debug
+    print(f"▶️ Prompt: {MESSAGE[:80]}...") 
     resposta = ask_openai(MESSAGE)
     send_telegram(resposta)
     print("✅ enviado pro Telegram")
