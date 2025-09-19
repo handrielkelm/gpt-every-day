@@ -39,6 +39,10 @@ def send_telegram(text: str):
         timeout=30,
     )
     r.raise_for_status()
+    r = requests.post(url, json=payload, timeout=20)
+    if r.status_code != 200:
+        print("Telegram error:", r.status_code, r.text)  # mostra o motivo
+        r.raise_for_status()
 
 def main():
     print(f"▶️ Prompt: {MESSAGE[:80]}...")  # debug
